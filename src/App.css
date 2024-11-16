@@ -1,0 +1,341 @@
+@property --border-gradient-rotation {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 90deg;
+}
+
+@property --border-radius {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 15px;
+}
+
+@property --hl {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --vl {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --pp {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+
+@property --content-panel-opacity {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --content-panel-blur {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 10px;
+}
+
+@keyframes input-border {
+  40% {
+    --pp: 50%;
+    --hl: 10px;
+    --vl: 0px;
+  }
+  60% {
+    --vl: 10px;
+  }
+  100% {
+    --pp: 0%;
+    --hl: 10px;
+    --vl: 10px;
+  }
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container {
+  position: relative;
+  --w: 4px; /* border thickness */
+
+  [class*="input-border-"] {
+    position: absolute;
+    background-color: black;
+    pointer-events: none;
+  }
+
+  .input-border-tlh,
+  .input-border-blh,
+  .input-border-trh,
+  .input-border-brh {
+    height: var(--w);
+    width: var(--hl);
+  }
+
+  .input-border-tlv,
+  .input-border-blv,
+  .input-border-trv,
+  .input-border-brv {
+    height: var(--vl);
+    width: var(--w);
+  }
+
+  .input-border-tlv,
+  .input-border-tlh {
+    top: calc(var(--pp) - calc(var(--w) / 2));
+    left: -1px;
+  }
+
+  .input-border-trv,
+  .input-border-trh {
+    top: calc(var(--pp) - calc(var(--w) / 2));
+    right: -1px;
+  }
+
+  .input-border-blv,
+  .input-border-blh {
+    bottom: calc(var(--pp) - calc(var(--w) / 2));
+    left: -1px;
+  }
+
+  .input-border-brv,
+  .input-border-brh {
+    bottom: calc(var(--pp) - calc(var(--w) / 2));
+    right: -1px;
+  }
+}
+
+.input-container:focus-within {
+  [class*="input-border-"] {
+    animation-name: input-border;
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+  }
+
+  input {
+    outline: none;
+  }
+}
+
+.write-sideways {
+  writing-mode: sideways-lr;
+  text-orientation: mixed;
+}
+
+.info {
+  background-color: white;
+  position: relative;
+
+  mask: conic-gradient(
+      from -45deg at bottom,
+      #0000,
+      #000 1deg 89deg,
+      #0000 90deg
+    )
+    50%/16px 100%;
+}
+
+.info::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-radial-gradient(#d97706 0 0.0001%, #fff 0 0.0002%) 60% 60%/3000px
+      3000px,
+    repeating-conic-gradient(#d97706 0 0.0001%, #fff 0 0.0002%) 40% 40%/4000px
+      3000px;
+  background-blend-mode: difference;
+  filter: blur(2px) opacity(16%) invert(100%) contrast(150%);
+  pointer-events: none;
+}
+
+.info-shadow {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  content: "";
+  background-color: black;
+  box-shadow: 4px 0px 8px 2px #000000;
+}
+
+.demo-card {
+  position: relative;
+  padding: 5px;
+}
+
+/* https://benfrain.com/how-to-create-rounded-gradient-borders-with-any-background-in-css/ */
+.demo-card-border {
+  z-index: 5;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0 var(--border-radius) 0 var(--border-radius);
+  border: 5px solid transparent;
+  background: linear-gradient(
+      var(--border-gradient-rotation),
+      rgb(30, 64, 175) 49%,
+      rgb(251, 146, 60) 49% 51%,
+      rgb(14, 165, 233) 51%
+    )
+    border-box;
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.demo-card-border-shadow {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: var(--border-radius) 0 var(--border-radius) 0;
+  filter: blur(8px);
+  background: linear-gradient(
+      var(--border-gradient-rotation),
+      rgba(0, 0, 0, 0) 44%,
+      rgba(251, 146, 60, 0.9) 50%,
+      rgba(0, 0, 0, 0) 56%
+    )
+    border-box;
+
+  clip-path: polygon(
+    /* 1 */ 9px 9px,
+    -30px 9px,
+    -30px -30px,
+    /* 4 */ calc(100% + 30px) -30px,
+    calc(100% + 30px) calc(100% + 30px),
+    -30px calc(100% + 30px),
+    -30px 9px,
+    /* 8 */ 9px 9px,
+    9px calc(100% - 18px),
+    18px calc(100% - 9px),
+    calc(100% - 9px) calc(100% - 9px),
+    /* 12 */ calc(100% - 9px) 18px,
+    calc(100% - 18px) 9px
+  );
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+.demo-card-border,
+.demo-card-border-shadow {
+  transition:
+    --border-gradient-rotation 0.2s ease-in-out,
+    opacity 0.2s linear;
+}
+
+.demo-card:hover {
+  .demo-card-border-shadow,
+  .demo-card-border {
+    --border-gradient-rotation: 180deg;
+
+    transition:
+      --border-gradient-rotation 0.4s ease-in-out 0.1s,
+      opacity 0.1s linear;
+  }
+
+  .demo-card-border-shadow {
+    opacity: 1;
+  }
+
+  .content-panel {
+    opacity: 1;
+    filter: blur(0);
+    transition:
+      opacity 0.4s ease-in-out 0.1s,
+      filter 0.4s ease-in-out 0.1s;
+  }
+
+  .hover-control-opacity {
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out 0.1s;
+  }
+}
+
+.hover-control-opacity {
+  transition: opacity 0.2s linear;
+}
+
+.explanation-panel {
+  --timing-function: linear(
+    0,
+    0.086,
+    0.218 2.1%,
+    0.862 6.5%,
+    1.114 8.5%,
+    1.219,
+    1.296,
+    1.346,
+    1.37 12.9%,
+    1.373,
+    1.364,
+    1.345,
+    1.315 16.2%,
+    1.243 17.8%,
+    1.032 21.8%,
+    0.941 24%,
+    0.891 25.9%,
+    0.877,
+    0.869 27.8%,
+    0.868,
+    0.87 29.2%,
+    0.882 30.7%,
+    0.907 32.4%,
+    0.981 36.4%,
+    1.012 38.3%,
+    1.036 40.5%,
+    1.042,
+    1.046 42.7% 44.1%,
+    1.042 45.7%,
+    0.996 53.3%,
+    0.988,
+    0.984 57.5%,
+    0.986 61%,
+    1.001 68%,
+    1
+  );
+
+  animation-name: shimmer;
+  animation-duration: 1.2s;
+  animation-timing-function: var(--timing-function);
+  cursor: grab;
+}
+
+.explanation-panel:not(.react-draggable-dragging) {
+  transition: transform 1s var(--timing-function);
+}
+
+.explanation-panel:active {
+  cursor: grabbing;
+}
+
+.content-panel {
+  cursor: pointer;
+  opacity: var(--content-panel-opacity);
+  filter: blur(var(--content-panel-blur));
+  transition:
+    opacity 0.2s ease-out,
+    filter 0.2s ease-out;
+}
+
+.demo-card-clip {
+  clip-path: inset(0);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translate(-100%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
