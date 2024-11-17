@@ -339,32 +339,6 @@ export const EditPost = (props) => {
             </h2>
             <DemoCard
               ref={contentRef1}
-              link="https://github.com/cruncha-cruncha/zork1-compiler/blob/master/src/stats/routine_tracker.rs"
-              explanation={
-                <>
-                  <p>Rust</p>
-                  <p className="mt-2">
-                    This excerpt comes from a transpiler (zil-like to js).
-                    Zil-like uses polish notation, so an 'is-ascending' operator
-                    makes more sense than 'greater-than' or 'less-than'. By this
-                    point in the transpiler, zil-like code has been parsed into
-                    an AST which now needs to be validated: is-asc takes at
-                    least two numbers or numeric variables. By boxing{" "}
-                    <code>v</code> as <code>last_writer</code>, this code builds
-                    a tree of traits.
-                  </p>
-                </>
-              }
-              content={
-                <div className="w-fit p-4 text-orange-300">
-                  <pre>
-                    <code>{rustCodeSample}</code>
-                  </pre>
-                </div>
-              }
-            />
-            <DemoCard
-              ref={contentRef2}
               link="https://github.com/cruncha-cruncha/lobster/blob/main/frontend/src/pages/EditPost.jsx"
               explanation={
                 <>
@@ -389,7 +363,7 @@ export const EditPost = (props) => {
               }
             />
             <DemoCard
-              ref={contentRef3}
+              ref={contentRef2}
               link="https://github.com/cruncha-cruncha/lobster/blob/main/search-handler/elastic.go"
               explanation={
                 <>
@@ -418,8 +392,34 @@ export const EditPost = (props) => {
               }
             />
             <DemoCard
+              ref={contentRef3}
+              link="https://github.com/cruncha-cruncha/zork1-compiler/blob/master/src/stats/routine_tracker.rs"
+              explanation={
+                <>
+                  <p>Rust</p>
+                  <p className="mt-2">
+                    This excerpt comes from a transpiler (zil-like to js).
+                    Zil-like uses polish notation, so an 'is-ascending' operator
+                    makes more sense than 'greater-than' or 'less-than'. By this
+                    point in the transpiler, zil-like code has been parsed into
+                    an AST which now needs to be validated: is-asc takes at
+                    least two numbers or numeric variables. By boxing{" "}
+                    <code>v</code> as <code>last_writer</code>, this code builds
+                    a tree of traits.
+                  </p>
+                </>
+              }
+              content={
+                <div className="w-fit p-4 text-orange-300">
+                  <pre>
+                    <code>{rustCodeSample}</code>
+                  </pre>
+                </div>
+              }
+            />
+            <DemoCard
               ref={contentRef4}
-              link="https://drawsql.app/teams/none-1579/diagrams/swanduckgoose"
+              link="https://github.com/SwanDuckGoose/admin-dashboard-v1"
               explanation={
                 <>
                   <p>SQL</p>
