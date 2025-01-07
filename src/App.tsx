@@ -339,7 +339,7 @@ export const EditPost = (props) => {
             </h2>
             <DemoCard
               ref={contentRef1}
-              link="https://github.com/cruncha-cruncha/lobster/blob/main/frontend/src/pages/EditPost.jsx"
+              link="https://github.com/cruncha-cruncha/lobster/blob/kijiji/frontend/src/pages/EditPost.jsx"
               explanation={
                 <>
                   <p>React</p>
@@ -364,7 +364,7 @@ export const EditPost = (props) => {
             />
             <DemoCard
               ref={contentRef2}
-              link="https://github.com/cruncha-cruncha/lobster/blob/main/search-handler/elastic.go"
+              link="https://github.com/cruncha-cruncha/lobster/blob/kijiji/search-handler/elastic.go"
               explanation={
                 <>
                   <p>Go</p>
